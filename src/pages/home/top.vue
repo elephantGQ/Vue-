@@ -8,31 +8,40 @@
 </span>
         </a>
         
-        <a class="search" href="">
+        <router-link  class="search"  to="/search">
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe63c;</span>搜索您要卖的品牌、机器型号
-        </a>
+        </router-link>
         <a class="cart" href="">
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe63b;</span>
         </a>
     </header>
     <div class="headerNav">
       <ul>
-        <li class="first active">
-          <b>推荐</b>
-          <span></span>
-        </li>
-        <li>
-          <b>卖手机</b>
-          <span></span>
-        </li>
-        <li>
-          <b>卖笔记本</b>
-          <span></span>
-        </li>
-        <li>
-          <b>卖平板</b>
-          <span></span>
-        </li>
+        <router-link tag="li" to="/home/recommend" active-class="active" class="first">
+          <b>推荐
+              <span></span>
+          </b>
+          
+        </router-link>
+        <router-link tag="li" to="/home/phone" active-class="active">
+          <b>
+              卖手机
+              <span></span>
+          </b>
+          
+        </router-link>
+        <router-link tag="li" to="/home/notebook" active-class="active">
+          <b>卖笔记本
+              <span></span>
+          </b>
+          
+        </router-link>
+        <router-link tag="li" to="/home/pad" active-class="active">
+          <b>卖平板
+              <span></span>
+          </b>
+          
+        </router-link>
       </ul>
     </div>
   </div>
@@ -80,10 +89,11 @@ header
       float left
       padding-left 30px
       line-height 44px
-      position relative
 
       b 
         font-weight normal
+        display inline-block
+        position relative
       
     
 
@@ -95,14 +105,13 @@ header
       b 
         font-weight 900
         font-size 15px
-      
-
-      span 
-        background-image linear-gradient(90deg, #fffa8f, #ffd33f)
-        height 4px
-        width 100%
-        position absolute
-        top 35px
-        left 0
+        
+        span 
+            background-image linear-gradient(90deg, #fffa8f, #ffd33f)
+            height 4px
+            width 100%
+            position absolute
+            top 35px
+            left 0
      
 </style>
