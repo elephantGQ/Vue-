@@ -4,9 +4,11 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/About">About</router-link>
     </div> -->
-      
+   
    <main>
+       <transition name="fade">   
     <router-view/>
+    </transition>
    </main>
    <nav>
       <ul>
@@ -49,14 +51,17 @@ export default {
 <style lang="stylus">
 @import '~@/assets/styles/reset.styl'
 
-html 
-    background #fff    
+html,body 
+    background #fff
+    height 100%
+    width 100%    
 .index-container
   height 100%
   display flex
   flex-direction column
   main
     flex 1
+    width 100%
     overflow hidden
   nav 
     height 50px
@@ -86,4 +91,10 @@ html
         .active4
             background-image url("https://sr.aihuishou.com/sos/image/6369187504134054301791478796.png?x-oss-process=image/quality,q_80&size=250x98") !important
       
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>

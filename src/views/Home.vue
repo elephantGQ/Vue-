@@ -2,8 +2,9 @@
 <div class="homeMain">
     <top></top>
     <div class="container">
-
+<transition name="fade">
     <router-view></router-view>
+</transition>
     </div>
 </div>
 
@@ -21,14 +22,22 @@ export default {
   }
 };
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
 .homeMain
     height 100%
     width 100%
+    display flex
+    flex-direction column
     .container
         height 100%
         width 100%
         overflow scroll
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>
 
 

@@ -1,15 +1,15 @@
 <template>
-   <div class="home">
+   <div class="home" v-if="flag">
       
     <div class="discount-product-page">
         
       <a href>
         <img
-          src="https://sr.aihuishou.com/sos/image/6369731869546169601854324504.jpg?x-oss-process=image/quality,q_80&size=750x200"
+          :src=dataList[0].item.coupon.headImgUrl
           alt
         />
       </a>
-       <div class="bg-color" style="background-color: rgb(255, 221, 98);"></div>
+       <div class="bg-color" :style=color></div>
     </div>
    
     <div class="coupon-container">
@@ -18,7 +18,7 @@
           <div class="coupon-image">
             <p>
               <i>¥</i>
-              <span>250</span>
+              <span>{{dataList[0].item.coupon.price}}</span>
             </p>
           </div>
           <div class="device-info no-product-info">
@@ -29,7 +29,7 @@
               <span>最高加价:</span>
               <p class="price">
                 <i>¥</i>
-                <span>250</span>
+                <span>{{dataList[0].item.coupon.price}}</span>
               </p>
             </div>
           </div>
@@ -37,13 +37,13 @@
         <dd>
           <div class="time-container">
             <p class="time-down">
-              <span>00</span>
+              <span>{{totaltime.day}}</span>
               <i>天</i>
-              <span>07</span>
+              <span>{{totaltime.hour}}</span>
               <i>时</i>
-              <span>14</span>
+              <span>{{totaltime.min}}</span>
               <i>分</i>
-              <span>08</span>
+              <span>{{totaltime.sec}}</span>
               <i>秒</i>
             </p>
             <i class="rule"></i>
@@ -52,29 +52,14 @@
         </dd>
       </dl>
     </div>
-    <div class="single-image"><a href="javascript:;"><img src="https://sr.aihuishou.com/sos/image/6369162687464023901904800109.png?x-oss-process=image/quality,q_80&amp;size=750x100" alt=""></a></div>
+    <div class="single-image"><a href="javascript:;"><img :src=dataList[1].items[0].imageUrl alt=""></a></div>
     <div class="navgator">
         <ul>
-            <li>
-                <img src="https://sr.aihuishou.com/sos/image/636915304029273240688456435.png?x-oss-process=image/quality,q_80&amp;size=142x142" alt="">
-                <span>卖手机</span>
+            <li v-for="item in dataList[2].items" :key=item.id>
+                <img :src=item.imageUrl alt="">
+                <span>{{item.title}}</span>
             </li>
-            <li>
-                <img src="https://sr.aihuishou.com/sos/image/6369153041238368801628141271.png?x-oss-process=image/quality,q_80&amp;size=142x142" alt="">
-                <span>买笔记本</span>
-            </li>
-            <li>
-                <img src="https://sr.aihuishou.com/sos/image/636915304203160180355749842.png?x-oss-process=image/quality,q_80&amp;size=142x142" alt="">
-                <span>卖平板</span>
-            </li>
-            <li>
-                <img src="https://sr.aihuishou.com/sos/image/636915304278953410260135749.png?x-oss-process=image/quality,q_80&amp;size=142x142" alt="">
-                <span>摄影摄像</span>
-            </li>
-            <li>
-                <img src="https://sr.aihuishou.com/sos/image/636915304338106990270685409.png?x-oss-process=image/quality,q_80&amp;size=142x142" alt="">
-                <span>智能数码</span>
-            </li>
+            
         </ul>
     </div>
     <div class="single-image"><a href="https://m.aihuishou.com/n/#/category?type=shouji"><img src="https://sr.aihuishou.com/sos/image/6367657649175868001951108153.png?x-oss-process=image/quality,q_80&amp;size=750x152" alt=""></a></div>
@@ -86,51 +71,38 @@
           <div class="old-new-container">
         <div class="old-new-item">
             <div class="tag-old tag-item">旧机估价</div>
-            <img src="https://sr.aihuishou.com/image/5a28b40bc60057c40a000005.png" alt="" class="product-img">
-            <h5 class="product-name">苹果 iPhone X</h5>
-            <p class="product-price">最高回收价 <span>¥5680</span></p>
+            <img :src=dataList[5].item.inquiryHomeRecord.productImg alt="" class="product-img">
+            <h5 class="product-name">{{dataList[5].item.inquiryHomeRecord.productName}}</h5>
+            <p class="product-price">最高回收价 <span>¥{{dataList[5].item.inquiryHomeRecord.maxPrice}}</span></p>
             </div>
             <div class="old-new-item">
         <div class="tag-new tag-item">新机原价</div>
-        <img src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-img/6368618584097071101766360696MTU1ODQyOTUwNDg3Mg==.png" alt="" class="product-img">
+        <img :src=dataList[5].item.topOfNewProduct.productImg alt="" class="product-img">
         <div>
-            <div class="new-tag">最高省<span>150</span>
+            <div class="new-tag">最高省<span>{{dataList[5].item.topOfNewProduct.subsidies}}</span>
             </div></div>
-        <h5 class="product-name">苹果 iPhone XR</h5>
-        <p class="product-price">新机原价 <span>¥5288</span>起</p></div>
+        <h5 class="product-name">{{dataList[5].item.topOfNewProduct.productName}}</h5>
+        <p class="product-price">新机原价 <span>¥{{dataList[5].item.topOfNewProduct.price}}</span>起</p></div>
         <div class="old-new-tag"></div></div>
-         <div class="ready-replace"><div class="ready-replace-left"><div class="tag-money"></div>预计到店获得<span><i>¥</i>542</span></div><div class="button">去看看</div></div>
+         <div class="ready-replace"><div class="ready-replace-left"><div class="tag-money"></div>预计到店获得<span><i>¥</i>{{-dataList[5].item.finalPrice}}</span></div><div class="button">去看看</div></div>
       </div>
         <footer>
             <div class="title">更多火爆新机</div>
             <div class="replace-list">
-                <div class="replace-item">
-                    <img src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-img/1MTU1ODU5MDM0NDc5Nw==.jpg" alt="">
-                    <h5>荣耀 8X</h5>
-                    <p><span>¥1399</span>起</p>
-                    <div class="replace-tag">最高省<span>150</span></div>
+                <div class="replace-item" v-for="item in dataList[5].item.recommendProductList" :key=item.id>
+                    <img :src=item.productImg alt="">
+                    <h5>{{item.productName}}</h5>
+                    <p><span>¥{{item.price}}</span>起</p>
+                    <div class="replace-tag">最高省<span>{{item.subsidies}}</span></div>
                     </div>
-                    <div class="replace-item">
-                        <img src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-img/1MTU1ODU5ODgxNzI1NA==.jpg" alt="">
-                        <h5>红米 Note 7</h5>
-                        <p><span>¥939</span>起</p>
-                        <div class="replace-tag">最高省<span>10</span></div>
-                        </div><div class="replace-item">
-                            <img src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-img/1MTU1ODU5OTk1MjUwMA==.jpg" alt="">
-                            <h5>荣耀 20i</h5>
-                            <p><span>¥1399</span>起</p>
-                            <div class="replace-tag">最高省<span>100</span></div>
-                            </div></div>
+                    </div>
             <div class="serve-list"><span>• 全国联保</span><span>• 省钱省心</span><span>• 不限旧机</span><span>• 闪电到货</span></div>
         </footer>
         <div class="coral-text">
       <div class="text swiper-no-swiping">
           <div class="swiper-container">
               <div class="swiper-wrapper">
-<div class="swiper-slide item swiper-slide-duplicate" data-swiper-slide-index="99" style="height: 32px;">北京市马先生 以￥2999 喜提荣耀20 8GB 256GB 幻夜黑 全网通</div>
-            <div class="swiper-slide item" data-swiper-slide-index="0" style="height: 32px;">广州市张先生 以￥2799 喜提红米 K20 Pro 8GB 128GB 冰山蓝 全网通</div>
-          <div class="swiper-slide item" data-swiper-slide-index="7" style="height: 32px;">深圳市廖女士 以￥1099 喜提红米 Note7 4GB+64GB 梦幻蓝</div>
-            <div class="swiper-slide item" data-swiper-slide-index="8" style="height: 32px;">北京市杨女士 以￥4188 喜提华为 P30 8GB 128GB 天空之境</div>
+            <div class="swiper-slide item" v-for="(item,index) in orders" :key=index :data-swiper-slide-index=index style="height: 32px;">{{item}}</div>
               </div></div>
       </div>
       </div>  
@@ -147,20 +119,73 @@
 </template>
 <script>
 import Swiper from 'swiper'
+import http from '../../utils/http'
+import BScroll from 'better-scroll'
+import { Indicator, Toast } from 'mint-ui'
 export default {
   name: "recommend",
-  mounted() {
+  data() {
+      return {
+          dataList:[],
+          flag:false,
+          orders:[],
+          time:{}
+
+      }
+  },
+  computed: {
+      color(){
+          return "background-color:"+this.dataList[0].item.coupon.backgroudColor
+      },
+      totaltime(){
+          return {
+              day:Math.floor(this.time/ (1000 * 60 * 60 * 24)),
+              hour:Math.floor(this.time% (1000 * 60 * 60 * 24) / (1000 * 60 * 60)),
+              min:Math.floor(this.time% (1000 * 60 * 60) / (1000 * 60)),
+              sec:Math.floor(this.time % 60000 / 1000) 
+          }
+      },
+      
+  },
+async mounted() {
+
+    
+    Indicator.open({
+    text: 'Loading...',
+    spinnerType: 'snake'
+    });
+    
+    let result = await http.get({
+      url: '/api/common/channel-info/7?inquirykey=&cityid=31&productId=&lantitude=&longitude='
+    })
+    this.flag=true
+    this.dataList=result.data
+    this.time=this.dataList[0].item.coupon.remainTotalMilliSecond
+    console.log(this.time)
+    setInterval(()=>{
+        this.time-=1000
+    },1000)
+    Indicator.close()
+    var orderList = await http.get({
+        url: '/api/home/coral-orders'
+        })
+        this.orders=orderList.data
+    this.$nextTick( async() => {
+        
       var mySwiper = new Swiper('.swiper-container', {
         autoplay: true,//可选选项，自动滑动
         direction : 'vertical',
+        delay: 1000,
         loop : true,
+})
 })
 }
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" >
 @import '~@/assets/styles/border'
 @import '~@/assets/styles/ellipsis'
+
 .home 
   width 100%
   height 100%
@@ -297,9 +322,9 @@ export default {
                 width: .86rem;
                 text-align: center;
   .navgator
-      padding 0 14px 10px
+      padding 0 .14rem .1rem
       width 100%
-      height 87px
+      height .87rem
       ul
         display flex
         align-items center
@@ -396,6 +421,8 @@ export default {
             display flex
             .ready-replace-left
                 flex 1
+                font-size .14rem
+                font-weight 500
                 .tag-money
                         width: .26rem;
                         height: .18rem;

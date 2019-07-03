@@ -52,6 +52,7 @@ export default {};
 
 <style lang="stylus">
 @import '~@/assets/styles/iconfont'
+@import '~@/assets/styles/ellipsis'
 header 
   display flex !important
   justify-content center
@@ -70,6 +71,7 @@ header
       height 32px 
       border-radius 18px
       line-height 32px
+      ellipsis(100%)
   .cart
       width 40px
       height 44px
