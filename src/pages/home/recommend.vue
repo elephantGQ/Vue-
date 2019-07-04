@@ -182,10 +182,11 @@ async mounted() {
 }
 }
 </script>
-<style lang="stylus" >
+<style lang="stylus" scope>
 @import '~@/assets/styles/border'
 @import '~@/assets/styles/ellipsis'
-
+html,body 
+    background #fff
 .home 
   width 100%
   height 100%

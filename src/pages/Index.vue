@@ -52,7 +52,6 @@ export default {
 @import '~@/assets/styles/reset.styl'
 
 html,body 
-    background #fff
     height 100%
     width 100%    
 .index-container
