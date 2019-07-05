@@ -88,14 +88,18 @@
       </div>
         <footer>
             <div class="title">更多火爆新机</div>
+           
+
+            
             <div class="replace-list">
-                <div class="replace-item" v-for="item in dataList[5].item.recommendProductList" :key=item.id>
+                <div class="replace-item" v-for="item in dataList[5].item.recommendProductList" @click="handleClick(item.id)" :key=item.id>
                     <img :src=item.productImg alt="">
                     <h5>{{item.productName}}</h5>
                     <p><span>¥{{item.price}}</span>起</p>
                     <div class="replace-tag">最高省<span>{{item.subsidies}}</span></div>
                     </div>
                     </div>
+                    
             <div class="serve-list"><span>• 全国联保</span><span>• 省钱省心</span><span>• 不限旧机</span><span>• 闪电到货</span></div>
         </footer>
         <div class="coral-text">
@@ -147,6 +151,16 @@ export default {
       },
       
   },
+  methods: {
+handleClick(pid) {
+this.$router.push({
+name: 'detail',
+params: {
+pid
+}
+})
+}
+},
 async mounted() {
 
     
@@ -248,9 +262,7 @@ html,body
                     width: .54rem;
                     display: -ms-flexbox;
                     display: flex;
-                    -ms-flex-align: center;
                     align-items: center;
-                    -ms-flex-pack: center;
                     justify-content: center;
                     color: #ff5647;
                     font-size: .20rem;

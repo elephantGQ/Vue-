@@ -17,6 +17,9 @@ header
     text-align center
     line-height .44rem
     font-size .18rem
+    box-shadow: 0 0 0.1rem 0 rgba(0,0,0,.05);
+    position relative
+    z-index 1000
 </style>
 
 

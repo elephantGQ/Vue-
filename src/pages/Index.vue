@@ -50,6 +50,7 @@ export default {
 </script>
 <style lang="stylus">
 @import '~@/assets/styles/reset.styl'
+@import '~@/assets/styles/swiper.styl'
 
 html,body 
     height 100%
