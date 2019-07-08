@@ -398,6 +398,7 @@ html,body
                 flex-direction column
                 align-items center 
                 justify-content center
+                overflow hidden
                 .text
                     width 100%
                     
@@ -407,11 +408,16 @@ html,body
                         font-size .16rem
                         font-weight 700
                         height .22rem
-                        overflow: hidden;
+                        white-space nowrap
+                        overflow hidden
+                        text-overflow ellipsis
                        
                     .sale
                         padding-top .04rem
                         display block
+                        white-space nowrap
+                        overflow hidden
+                        text-overflow ellipsis
                 .price
                     width 100%
                     padding .1rem 0
@@ -499,13 +505,18 @@ html,body
                                 font-size .14rem
                                 font-weight 700
                                 height .22rem
-                                overflow: hidden;
+                                white-space nowrap
+                                overflow hidden
+                                text-overflow ellipsis
                             
                             .sale
                                 padding-top .03rem
                                 display block
                                 font-size: .12rem;
                                 color #111
+                                white-space nowrap
+                                overflow hidden
+                                text-overflow ellipsis
                                 
                         .price
                             .new

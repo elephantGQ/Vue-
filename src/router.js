@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import New from './views/New.vue'
 import Search from './views/Search.vue'
+import Location from './views/Location.vue'
+import Category from './views/Category.vue'
 import Server from './views/Server.vue'
 import Detail from './views/Detail.vue'
 import Account from './views/Account.vue'
@@ -27,24 +29,28 @@ export default new Router({
             redirect: '/home/recommend',
             children:[
               {
-                  path: 'phone',
-                  name: 'phone',
-                  component: Phone
-                }, 
-              {
                   path: 'recommend',
                   name: 'recommend',
-                  component: Recommend
+                  component: Recommend,
+                  meta: 1,
+                },                 
+              {
+                  path: 'phone',
+                  name: 'phone',
+                  component: Phone,
+                  meta: 2,
                 }, 
               {
                   path: 'pad',
                   name: 'pad',
-                  component: Pad
+                  component: Pad,
+                  meta: 4,
                 }, 
               {
                   path: 'notebook',
                   name: 'notebook',
-                  component: Notebook
+                  component: Notebook,
+                  meta: 3,
                 }, 
             ]
           },
@@ -78,6 +84,16 @@ export default new Router({
         path: '/detail/:pid',
         name: 'detail',
         component: Detail
+      },
+    {
+        path: '/location',
+        name: 'location',
+        component: Location
+      },
+    {
+        path: '/category',
+        name: 'category',
+        component: Category
       },
   ]
 })

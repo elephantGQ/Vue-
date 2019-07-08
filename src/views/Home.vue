@@ -2,7 +2,7 @@
 <div class="homeMain">
     <top></top>
     <div class="container">
-<transition name="fade">
+<transition :name="transitionName">
     <router-view></router-view>
 </transition>
     </div>
@@ -19,6 +19,12 @@ export default {
   components: {
     HelloWorld,
     Top
+  },
+  watch: {
+    '$route' (to, from) {
+      // console.log(to.meta, from.meta)
+      this.transitionName = to.meta > from.meta ? 'slide-left' : 'slide-right'
+    }
   }
 };
 </script>
@@ -38,6 +44,18 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+.slide-left-enter-active,
+.slide-right-enter-active,
+.slide-left-leave-active,
+.slide-right-leave-active
+  transition all .3s
+
+.slide-left-enter,
+.slide-right-leave-to
+  transform translate3d(100%, 0, 0)
+.slide-left-leave-to,
+.slide-right-enter
+  transform translate3d(-100%, 0, 0)
 </style>
 
 

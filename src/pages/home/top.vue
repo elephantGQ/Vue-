@@ -2,11 +2,11 @@
   <div class="headerTop">
     <header>
       
-        <a class="location" href="" style="color: rgb(0, 0, 0);">
+        <router-link to="/location" class="location" href="" style="color: rgb(0, 0, 0);">
           北京市
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe65a;
 </span>
-        </a>
+        </router-link>
         
         <router-link  class="search"  to="/search">
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe63c;</span>搜索您要卖的品牌、机器型号
@@ -53,6 +53,9 @@ export default {};
 <style lang="stylus">
 @import '~@/assets/styles/iconfont'
 @import '~@/assets/styles/ellipsis'
+.headerTop
+    position relative
+    z-index 1000000
 header 
   display flex !important
   justify-content center

@@ -66,7 +66,7 @@
     
   <div class="single-image"><a href="https://m.aihuishou.com/n/#/ofnew/home"><img src="https://sr.aihuishou.com/sos/image/6369153060430632101376064077.png?x-oss-process=image/quality,q_80&amp;size=750x120" alt=""></a></div>
   <div class="new-container">
-      <div class="main">
+      <div class="omain">
 
           <div class="old-new-container">
         <div class="old-new-item">
@@ -84,7 +84,7 @@
         <h5 class="product-name">{{dataList[5].item.topOfNewProduct.productName}}</h5>
         <p class="product-price">新机原价 <span>¥{{dataList[5].item.topOfNewProduct.price}}</span>起</p></div>
         <div class="old-new-tag"></div></div>
-         <div class="ready-replace"><div class="ready-replace-left"><div class="tag-money"></div>预计到店获得<span><i>¥</i>{{-dataList[5].item.finalPrice}}</span></div><div class="button">去看看</div></div>
+         <div class="ready-replace"><div class="ready-replace-left"><div class="tag-money"></div>预计到店获得<span><i>¥</i>{{Math.abs(dataList[5].item.finalPrice)}}</span></div><div class="button">去看看</div></div>
       </div>
         <footer>
             <div class="title">更多火爆新机</div>
@@ -337,7 +337,6 @@ html,body
   .navgator
       padding 0 .14rem .1rem
       width 100%
-      height .87rem
       ul
         display flex
         align-items center
@@ -361,16 +360,17 @@ html,body
 
  .new-container
      padding 0 .16rem
-     .main
+     .omain
         box-shadow: 0 0.02rem 0.12rem 0 hsla(195,9%,83%,.44);
         border-radius: .04rem;
         padding: .15rem;
         height 2.18rem
+        position relative
+        z-index 10
         .old-new-container
             display flex
             justify-content center
             align-items center
-            position relative
             padding-bottom .1rem
             border_1px(0 0 1px 0)
             .old-new-item
@@ -379,7 +379,6 @@ html,body
                 flex-direction column
                 justify-content center
                 align-items center
-                position relative
                 .new-tag
                     position: absolute;
                     top: .1rem;

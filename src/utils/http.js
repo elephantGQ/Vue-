@@ -11,6 +11,18 @@ const http = {
     .then((result) => {
       return result.data
     })
+  },
+  post({url, data={},params={},headers={},}) {
+    return axios({
+      url,
+      data,
+      method: 'POST',
+      params,
+      headers,
+    })
+    .then((result) => {
+      return result.data
+    })
   }
 }
 

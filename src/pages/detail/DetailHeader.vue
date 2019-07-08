@@ -27,6 +27,8 @@ header
     box-shadow: 0 0 0.1rem 0 rgba(0,0,0,.05);
     position relative
     z-index 1000
+    h2
+        font-weight 400
     .back
         position: absolute;
         left: 0;

@@ -4,6 +4,7 @@ module.exports = {
     ],
     "plugins": [["component", 
       {
+        ws:"false",
         "libraryName": "mint-ui",
         "style": true
       }
