@@ -15,7 +15,7 @@
              </li>
          </ul>
      </div>
-     <div class="multi-image"><a href=""><img src="https://sr.aihuishou.com/sos/image/6369345169684795901379405081.png?x-oss-process=image/quality,q_80&amp;size=750x168"></a></div>
+      <div class="single-image"><router-link to="/category/0"><img src="https://sr.aihuishou.com/sos/image/6367657649175868001951108153.png?x-oss-process=image/quality,q_80&amp;size=750x152" alt=""></router-link ></div>
      <div class="multi-image"><a href=""><img src="https://sr.aihuishou.com/sos/image/636777053433809460465574684.png?x-oss-process=image/quality,q_80&amp;size=722x61"></a></div>
     <div class="single-image"><a href=""><img :src=msg1[0].imageUrl alt=""></a></div>
  <div class="single-image"><a href=""><img :src=msg2[0].imageUrl alt=""></a></div>

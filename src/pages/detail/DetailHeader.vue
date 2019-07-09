@@ -1,6 +1,6 @@
 <template>
     <header>
-        <span class="back"></span>
+        <span class="back" @click="handleClickBack"></span>
     <h2>
         {{title}}
     </h2>
@@ -12,7 +12,12 @@ export default {
   name: 'DetailHeader',
   props: {
     title: String
-  }
+  },
+  methods: {
+      handleClickBack() {
+      this.$router.go(-1)
+    }, 
+  },
 }
 </script>
 <style lang="stylus" scoped>

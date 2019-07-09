@@ -1,40 +1,55 @@
 <template>
     <div class="main">
         <header >
-            <span  class="back"></span>
-            <div>
+            <span  class="back" @click="handleClickBack"></span>
+            <router-link tag="div" to="/search">
                 <span class="iconfont" >&#xe63c;</span>
                 <span>苹果 iPhone X</span>
-                </div>
+                </router-link>
             </header>
     <div class="headerNav">
       <ul>
-        <li   class="first active">
+        <li   
+        @click="handleClickTop(1,0)"
+        :class="topflag === 0 ? 'active' : '' "
+        class="first">
           <b>卖手机
               <span></span>
           </b>
           
         </li>
-        <li>
+        <li
+        @click="handleClickTop(5,1)"
+        :class="topflag === 1 ? 'active' : '' "
+        >
           <b>
               卖笔记本
               <span></span>
           </b>
           
         </li>
-        <li>
+        <li
+        @click="handleClickTop(6,2)"
+        :class="topflag === 2 ? 'active' : '' "
+        >
           <b>卖平板
               <span></span>
           </b>
           
         </li>
-        <li>
+        <li
+        @click="handleClickTop(22,3)"
+        :class="topflag === 3 ? 'active' : '' "
+        >
          <b>摄影摄像
               <span></span>
           </b>
           
         </li>
-        <li>
+        <li
+        @click="handleClickTop(3,4)"
+        :class="topflag === 4 ? 'active' : '' "
+        >
          <b>智能数码
               <span></span>
           </b>
@@ -44,17 +59,113 @@
     </div>
     <div class="container">
         <div class="left">
-            <ul><li class="chosen"><p>推荐</p></li><li class=""><p>苹果</p></li><li class=""><p>华为 </p></li><li class=""><p>荣耀</p></li><li class=""><p>vivo</p></li><li class=""><p>OPPO</p></li><li class=""><p>小米</p></li><li class=""><p>三星</p></li><li class=""><p>魅族 </p></li><li class=""><p>乐视</p></li><li class=""><p>锤子</p></li><li class=""><p>金立</p></li><li class=""><p>一加</p></li><li class=""><p>联想</p></li><li class=""><p>索尼</p></li><li class=""><p>努比亚</p></li><li class=""><p>黑莓 </p></li><li class=""><p>HTC</p></li><li class=""><p>中兴 </p></li><li class=""><p>酷派 </p></li><li class=""><p>360</p></li><li class=""><p>黑鲨科技</p></li><li class=""><p>美图</p></li><li class=""><p>诺基亚 </p></li><li class=""><p>华硕</p></li><li class=""><p>谷歌</p></li><li class=""><p>摩托罗拉 </p></li><li class=""><p>夏普 </p></li><li class=""><p>LG</p></li><li class=""><p>realme</p></li><li class=""><p>小辣椒</p></li><li class=""><p>朵唯</p></li><li class=""><p>飞利浦</p></li><li class=""><p>酷比</p></li><li class=""><p>TCL</p></li><li class=""><p>SUGAR</p></li><li class=""><p>多普达 </p></li><li class=""><p>天语</p></li><li class=""><p>IUNI</p></li><li class=""><p>戴尔</p></li><li class=""><p>惠普</p></li><li class=""><p>其他品牌</p></li></ul>
+            <ul><li 
+            :class="leftflag === 0 ? 'chosen' : '' "
+            v-show="leftlist.length"
+            ><p>推荐</p></li>
+            <li class=""
+            v-for="(item,index) in leftlist" :key="item.id" :id="item.id"
+            :class="leftflag === index+1 ? 'chosen' : '' "
+            @click="handleClickLeft(item.id,index+1)"
+            ><p>{{item.name}}</p></li>
+            </ul>
         </div>
         <div class="right">
-<div><div class="common-item"><p><span>1</span><span>苹果 iPhone X</span></p></div><div class="common-item"><p><span>2</span><span>苹果 iPhone 7 Plus</span></p></div><div class="common-item"><p><span>3</span><span>苹果 iPhone 6</span></p></div><div class="common-item"><p><span>4</span><span>苹果 iPhone 8 Plus</span></p></div><div class="common-item"><p><span>5</span><span>苹果 iPhone 6 Plus</span></p></div><div class="common-item"><p><span>6</span><span>苹果 iPhone 6S Plus</span></p></div><div class="common-item"><p><span>7</span><span>苹果 iPhone 6S</span></p></div><div class="common-item"><p><span>8</span><span>苹果 iPhone 7</span></p></div><div class="common-item"><p><span>9</span><span>苹果 iPhone 8</span></p></div><div class="common-item"><p><span>10</span><span>苹果 iPhone 5S</span></p></div><div class="common-item"><p><span>11</span><span>苹果 iPhone XS Max</span></p></div><div class="common-item"><p><span>12</span><span>苹果 iPhone SE</span></p></div><div class="common-item"><p><span>13</span><span>苹果 iPhone XR</span></p></div><div class="common-item"><p><span>14</span><span>苹果 iPhone XS</span></p></div><div class="common-item"><p><span>15</span><span>苹果 iPhone 5</span></p></div><div class="common-item"><p><span>16</span><span>苹果 iPhone 4S</span></p></div><div class="common-item"><p><span>17</span><span>苹果 iPhone 5C</span></p></div><div class="common-item"><p><span>18</span><span>苹果 iPhone 4</span></p></div><div class="common-item"><p><span>19</span><span>苹果 iPhone 3GS</span></p></div><div class="common-item"><p><span>20</span><span>苹果 iPhone 3G</span></p></div></div>
+        <div>
+            <div class="common-item" 
+            v-for="(item,index) in rightlist" :key="item.id" :id="item.id"
+            ><p><span>{{index+1}}</span><span>{{item.name}}</span></p></div>
+        </div>
         </div>
     </div>
     </div>
 </template>
 <script>
+import Swiper from 'swiper'
+import http from '../utils/http'
+import BScroll from 'better-scroll'
+import { Indicator, Toast } from 'mint-ui'
 export default {
+    data() {
+        return {
+            leftlist:[],
+            rightlist:[],
+            topflag:0,
+            leftflag:0
+        }
+    },
+    async mounted() {
+    let urlList=[1,5,6,22,3]
+    this.topflag=Number(this.$route.params.pid)
+    Indicator.open({
+    text: 'Loading...',
+    spinnerType: 'snake'
+    });
+      let resultL= await http.get({
+          url:`/api/product/category-brands/${urlList[this.$route.params.pid]}`
+      })  
+     this.leftlist=resultL.data
+    let resultR=await http.post({
+        url:"api/product/search",
+        headers:{
+            "Content-Type":"application/json;charset=UTF-8"
+        },
+        data:{"categoryId":urlList[this.$route.params.pid],"brandId":"","pageIndex":0,"pageSize":20,"isRecommend":true,"refresh":true}
+        })
+     this.rightlist=resultR.data
+     console.log(resultR.data)
+     Indicator.close()
+    },
+    methods: {
+    handleClickBack() {
+      this.$router.go(-1)
+    },
+    async handleClickLeft(id,index){
+        this.leftflag=index
+       Indicator.open({
+        text: 'Loading...',
+        spinnerType: 'snake'
+        });
+        
+         let resultR=await http.post({
+            url:"api/product/search",
+            headers:{
+                "Content-Type":"application/json;charset=UTF-8"
+            },
+            data:{"brandId":id,"pageIndex":0,"pageSize":20,"isRecommend":false,"refresh":true}
+            })
+            console.log(resultR)
+            this.rightlist=resultR.data  
+            Indicator.close()
+        },
+        async handleClickTop(id,index){
+            this.topflag=index
+            this.leftflag=0
+            Indicator.open({
+            text: 'Loading...',
+            spinnerType: 'snake'
+            });
+            let resultL= await http.get({
+            url:`/api/product/category-brands/${id}`
+         })  
+            this.leftlist=resultL.data
+            console.log(resultL)
+            let resultR=await http.post({
+                url:"api/product/search",
+                headers:{
+                    "Content-Type":"application/json;charset=UTF-8"
+                },
+                data:{"categoryId":id,"brandId":"","pageIndex":0,"pageSize":20,"isRecommend":true,"refresh":true}
+                })
+                console.log(resultR)
+            this.rightlist=resultR.data  
+            Indicator.close()
+        },
+       
     
+    
+    
+    },
 }
 </script>
 <style lang="stylus" scoped>
@@ -135,6 +246,7 @@ header
             line-height .56rem
             border-bottom: 1px solid #eee
             background-color #f9faff
+            overflow hidden
             span 
                 padding-left .13rem
         .load-over 

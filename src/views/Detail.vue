@@ -90,9 +90,9 @@
     <div class="text">
         <div>添加旧机获取超值换新价</div>
     </div>
-    <div class="actions">
+    <router-link to="/category/1" tag="div" class="actions">
         <div class="button button-available">添加旧机</div>
-    </div>
+    </router-link>
 </div>
   </div>
 </template>

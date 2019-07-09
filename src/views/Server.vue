@@ -3,13 +3,13 @@
       <page-header :title="title"></page-header>
      <div class="region-list">
 
-         <div class="region-item active" v-if="regionsList.length" _id="all" @click="handleClick($event,'all')">附近(64)</div>
+         <div class="region-item active" v-if="regionsList.length" _id="all" @click="handleClick($event,'all')">附近</div>
 
-         <div class="region-item" v-for="item in regionsList"  :_id="item.id" @click="handleClick($event,item.id)">{{item.name}}</div>
+         <div class="region-item" v-for="item in regionsList" :key="item.id" :_id="item.id" @click="handleClick($event,item.id)">{{item.name}}</div>
       </div>
          
      <div class="container">
-      <div class="g-nbs-item" v-for="loc in addressList" v-if="filt==='all'||loc.idRegion===filt"  :idRegion="loc.idRegion">
+      <div class="g-nbs-item" v-for="(loc,index) in addressList" v-if="filt==='all'||loc.idRegion===filt"  :idRegion="loc.idRegion" :key="index">
           <a class="si-content" href="">
         <div class="si-title">
             <div class="si-title-block">
@@ -18,7 +18,7 @@
         </div>
         <div class="si-desc">{{loc.address}}</div>
         <div class="si-service-tags">
-            <span class="tag-item" v-for="tag in loc.shopServiceConfigs" >{{tag.subTitle}}</span>
+            <span class="tag-item" v-for="(tag,index) in loc.shopServiceConfigs" :key="index">{{tag.subTitle}}</span>
             
             </div>
     </a>
@@ -41,21 +41,22 @@ export default {
              title:"服务站",
              addressList:[],
              regionsList:[],
-             filt:"all"
+             filt:"all",
+             locId:31
          }
      },
     async mounted() {
-
+    this.locId=this.$store.state.loc.id
     console.log(Indicator.open)
     Indicator.open({
       text: '加载中...',
       spinnerType: 'triple-bounce'
     })
     let regions = await http.get({
-      url: '/api/city/regions/31'
+      url: `/api/city/regions/${this.locId}`
     })
     let result = await http.get({
-      url: '/api/city/31/shop'
+      url: `/api/city/${this.locId}/shop`
     })
     this.regionsList=regions.data
     this.addressList=result.data

@@ -9,14 +9,24 @@
 <div class="hotcity-container"><span>热门城市</span>
     <ul class="cityList">
        
-        <li class="" v-for="(e,index) in hot" :key="index" :id="e.id">{{e.name}}</li>
+        <li class="" 
+        v-for="(e,index) in hot" 
+        :key="index" 
+        :id="e.id"
+        @click="selectLoc({name:e.name,id:e.id})"
+        >{{e.name}}</li>
     </ul>
 </div>
 <div class="citylist-container">
     <ul>
         <li v-for="(value,key,index) in loc" :key="index"><span id="key">{{key}}</span>
             <dl>
-                <dt v-for="(e,index) in value" :key="index" :id="e.id">{{e.name}}</dt>
+                <dt 
+                v-for="(e,index) in value" 
+                :key="index" 
+                :id="e.id"
+                @click="selectLoc({name:e.name,id:e.id})"
+                >{{e.name}}</dt>
                
             </dl>
         </li>
@@ -66,6 +76,13 @@ export default {
             loc:{},
             hot:[]
         }
+    },
+    methods: {
+        selectLoc(obj){
+             this.$store.commit('setLoc',obj)
+             this.$router.go(-1)
+        }
+
     },
     components:{
         DetailHeader
@@ -125,6 +142,8 @@ export default {
     width 100%
     padding .15rem
     background-color: #f2f2f2
+    span
+        color #ccc
     .cityList
         li 
             display inline-block

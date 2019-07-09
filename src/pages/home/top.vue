@@ -3,7 +3,7 @@
     <header>
       
         <router-link to="/location" class="location" href="" style="color: rgb(0, 0, 0);">
-          北京市
+          {{locName}}
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe65a;
 </span>
         </router-link>
@@ -11,9 +11,9 @@
         <router-link  class="search"  to="/search">
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe63c;</span>搜索您要卖的品牌、机器型号
         </router-link>
-        <a class="cart" href="">
+        <router-link class="cart" to="/category/1">
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe63b;</span>
-        </a>
+        </router-link>
     </header>
     <div class="headerNav">
       <ul>
@@ -47,7 +47,16 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            locName:""
+        }
+    },
+    mounted() {
+        this.locName=this.$store.state.loc.name
+    },
+};
 </script>
 
 <style lang="stylus">

@@ -15,7 +15,13 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import Top from '@/pages/home/top.vue'
 export default {
+
   name: "home",
+  data() {
+      return {
+          transitionName: ''
+      }
+  },
   components: {
     HelloWorld,
     Top

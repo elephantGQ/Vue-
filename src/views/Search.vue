@@ -10,7 +10,7 @@
             </div>
         </div>
     </label>
-    <div class="btn-cancel">取消</div>
+    <div class="btn-cancel" @click="handleClickBack">取消</div>
 </header>
 <div class="search-container">
     <div class="search-content" v-show="flag">
@@ -75,6 +75,9 @@ export default {
     this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
     },
     methods:{
+        handleClickBack() {
+      this.$router.go(-1)
+    },
     getAnswer: async function () {
       var vm = this
         let result=await http.post({

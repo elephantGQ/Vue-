@@ -91,7 +91,7 @@ export default new Router({
         component: Location
       },
     {
-        path: '/category',
+        path: '/category/:pid',
         name: 'category',
         component: Category
       },

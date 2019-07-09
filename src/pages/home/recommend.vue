@@ -55,16 +55,15 @@
     <div class="single-image"><a href="javascript:;"><img :src=dataList[1].items[0].imageUrl alt=""></a></div>
     <div class="navgator">
         <ul>
-            <li v-for="item in dataList[2].items" :key=item.id>
+            <li v-for="item in dataList[2].items"  :key=item.id  @click="handleClickCate(item.order)">
                 <img :src=item.imageUrl alt="">
                 <span>{{item.title}}</span>
-            </li>
+             </li >
             
         </ul>
     </div>
-    <div class="single-image"><a href="https://m.aihuishou.com/n/#/category?type=shouji"><img src="https://sr.aihuishou.com/sos/image/6367657649175868001951108153.png?x-oss-process=image/quality,q_80&amp;size=750x152" alt=""></a></div>
-    
-  <div class="single-image"><a href="https://m.aihuishou.com/n/#/ofnew/home"><img src="https://sr.aihuishou.com/sos/image/6369153060430632101376064077.png?x-oss-process=image/quality,q_80&amp;size=750x120" alt=""></a></div>
+    <div class="single-image"><router-link to="/category/0"><img src="https://sr.aihuishou.com/sos/image/6367657649175868001951108153.png?x-oss-process=image/quality,q_80&amp;size=750x152" alt=""></router-link ></div>
+  <div class="single-image"><a href=""><img src="https://sr.aihuishou.com/sos/image/6369153060430632101376064077.png?x-oss-process=image/quality,q_80&amp;size=750x120" alt=""></a></div>
   <div class="new-container">
       <div class="omain">
 
@@ -152,14 +151,22 @@ export default {
       
   },
   methods: {
-handleClick(pid) {
-this.$router.push({
-name: 'detail',
-params: {
-pid
-}
-})
-}
+    handleClick(pid) {
+        this.$router.push({
+        name: 'detail',
+        params: {
+            pid
+            }
+            })
+        },
+    handleClickCate(pid) {
+        this.$router.push({
+        name: 'category',
+        params: {
+            pid
+            }
+            })
+        },    
 },
 async mounted() {
 
@@ -174,6 +181,7 @@ async mounted() {
     })
     this.flag=true
     this.dataList=result.data
+    console.log(this.dataList[2])
     this.time=this.dataList[0].item.coupon.remainTotalMilliSecond
     console.log(this.time)
     setInterval(()=>{
