@@ -10,8 +10,8 @@
     <div class="headerNav">
       <ul>
         <li   
-        @click="handleClickTop(1,0)"
-        :class="topflag === 0 ? 'active' : '' "
+        @click="handleClickTop(1,1)"
+        :class="topflag === 1 ? 'active' : '' "
         class="first">
           <b>卖手机
               <span></span>
@@ -19,8 +19,8 @@
           
         </li>
         <li
-        @click="handleClickTop(5,1)"
-        :class="topflag === 1 ? 'active' : '' "
+        @click="handleClickTop(5,5)"
+        :class="topflag === 5 ? 'active' : '' "
         >
           <b>
               卖笔记本
@@ -29,8 +29,8 @@
           
         </li>
         <li
-        @click="handleClickTop(6,2)"
-        :class="topflag === 2 ? 'active' : '' "
+        @click="handleClickTop(6,6)"
+        :class="topflag === 6 ? 'active' : '' "
         >
           <b>卖平板
               <span></span>
@@ -38,8 +38,8 @@
           
         </li>
         <li
-        @click="handleClickTop(22,3)"
-        :class="topflag === 3 ? 'active' : '' "
+        @click="handleClickTop(22,22)"
+        :class="topflag === 22 ? 'active' : '' "
         >
          <b>摄影摄像
               <span></span>
@@ -47,8 +47,8 @@
           
         </li>
         <li
-        @click="handleClickTop(3,4)"
-        :class="topflag === 4 ? 'active' : '' "
+        @click="handleClickTop(3,3)"
+        :class="topflag === 3 ? 'active' : '' "
         >
          <b>智能数码
               <span></span>
@@ -60,13 +60,15 @@
     <div class="container">
         <div class="left">
             <ul><li 
+            :id="0"
             :class="leftflag === 0 ? 'chosen' : '' "
             v-show="leftlist.length"
+            @click="handleClickLeft(0)"
             ><p>推荐</p></li>
             <li class=""
-            v-for="(item,index) in leftlist" :key="item.id" :id="item.id"
-            :class="leftflag === index+1 ? 'chosen' : '' "
-            @click="handleClickLeft(item.id,index+1)"
+            v-for="(item) in leftlist" :key="item.id" :id="item.id"
+            :class="leftflag === item.id ? 'chosen' : '' "
+            @click="handleClickLeft(item.id)"
             ><p>{{item.name}}</p></li>
             </ul>
         </div>
@@ -86,33 +88,73 @@ import http from '../utils/http'
 import BScroll from 'better-scroll'
 import { Indicator, Toast } from 'mint-ui'
 export default {
+    
     data() {
         return {
             leftlist:[],
             rightlist:[],
             topflag:0,
-            leftflag:0
+            leftflag:0,
+            page:0
         }
     },
     async mounted() {
-    let urlList=[1,5,6,22,3]
+    let that=this
+    let bScroll ={}
+   
+    // let urlList=[1,5,6,22,3]
     this.topflag=Number(this.$route.params.pid)
+    console.log(this.$route.params.pid)
+    this.leftflag=Number(this.$route.params.itemid)
     Indicator.open({
     text: 'Loading...',
     spinnerType: 'snake'
     });
       let resultL= await http.get({
-          url:`/api/product/category-brands/${urlList[this.$route.params.pid]}`
+          url:`/api/product/category-brands/${this.$route.params.pid}`
       })  
      this.leftlist=resultL.data
-    let resultR=await http.post({
+     let resultR={}
+     if(!Number(this.$route.params.itemid)){
+          resultR=await http.post({
         url:"api/product/search",
         headers:{
             "Content-Type":"application/json;charset=UTF-8"
         },
-        data:{"categoryId":urlList[this.$route.params.pid],"brandId":"","pageIndex":0,"pageSize":20,"isRecommend":true,"refresh":true}
+        data:{"categoryId":this.$route.params.pid,"brandId":"","pageIndex":that.page,"pageSize":20,"isRecommend":true,"refresh":true}
         })
+        }else{
+
+          resultR=await http.post({
+            url:"api/product/search",
+            headers:{
+                "Content-Type":"application/json;charset=UTF-8"
+            },
+            data:{"brandId":this.$route.params.itemid,"pageIndex":that.page,"pageSize":20,"isRecommend":false,"refresh":true}
+            })
+        }
      this.rightlist=resultR.data
+     bScroll = new BScroll('.right',{
+        scrollY: true,
+        click: true
+    })
+    bScroll.on('scrollEnd', async function() {
+        console.log(this.maxScrollY+"-"+this.y)
+         if (this.maxScrollY - this.y >= 0){
+             that.page++
+            let Right=await http.post({
+            url:"api/product/search",
+            headers:{
+                "Content-Type":"application/json;charset=UTF-8"
+            },
+            data:{"brandId":that.leftflag,"pageIndex":that.page,"pageSize":20,"isRecommend":false,"refresh":true}
+            })
+            that.rightlist=[...that.rightlist,...Right.data]
+            this.refresh()
+            
+         }
+        
+      })
      console.log(resultR.data)
      Indicator.close()
     },
@@ -120,23 +162,40 @@ export default {
     handleClickBack() {
       this.$router.go(-1)
     },
-    async handleClickLeft(id,index){
-        this.leftflag=index
+    async handleClickLeft(id){
+        this.page=0
+        let resultR=""
+        this.leftflag=id
        Indicator.open({
         text: 'Loading...',
         spinnerType: 'snake'
         });
-        
-         let resultR=await http.post({
+        if(Number(id)){
+            resultR=await http.post({
             url:"api/product/search",
             headers:{
                 "Content-Type":"application/json;charset=UTF-8"
             },
-            data:{"brandId":id,"pageIndex":0,"pageSize":20,"isRecommend":false,"refresh":true}
+            data:{"brandId":id,"pageIndex":this.page,"pageSize":20,"isRecommend":false,"refresh":true}
             })
+        }else{
+            resultR=await http.post({
+            url:"api/product/search",
+            headers:{
+                "Content-Type":"application/json;charset=UTF-8"
+            },
+            data:{"categoryId":this.$route.params.pid,"brandId":"","pageIndex":this.page,"pageSize":20,"isRecommend":true,"refresh":true}
+            })
+        }
+         
             console.log(resultR)
             this.rightlist=resultR.data  
-            Indicator.close()
+            // document.querySelector('.right').refresh()
+             this.$nextTick(() => {
+               document.querySelector('.right').scrollTo(0,0) 
+                 Indicator.close()
+            })
+           
         },
         async handleClickTop(id,index){
             this.topflag=index
@@ -155,7 +214,7 @@ export default {
                 headers:{
                     "Content-Type":"application/json;charset=UTF-8"
                 },
-                data:{"categoryId":id,"brandId":"","pageIndex":0,"pageSize":20,"isRecommend":true,"refresh":true}
+                data:{"categoryId":id,"brandId":"","pageIndex":this.page,"pageSize":20,"isRecommend":true,"refresh":true}
                 })
                 console.log(resultR)
             this.rightlist=resultR.data  
@@ -240,7 +299,7 @@ header
 
     .right 
         flex 1
-        overflow scroll
+        
         .common-item
             height .56rem
             line-height .56rem

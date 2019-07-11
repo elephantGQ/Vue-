@@ -62,7 +62,7 @@
             
         </ul>
     </div>
-    <div class="single-image"><router-link to="/category/0"><img src="https://sr.aihuishou.com/sos/image/6367657649175868001951108153.png?x-oss-process=image/quality,q_80&amp;size=750x152" alt=""></router-link ></div>
+    <div class="single-image"><router-link to="/category/1/0"><img src="https://sr.aihuishou.com/sos/image/6367657649175868001951108153.png?x-oss-process=image/quality,q_80&amp;size=750x152" alt=""></router-link ></div>
   <div class="single-image"><a href=""><img src="https://sr.aihuishou.com/sos/image/6369153060430632101376064077.png?x-oss-process=image/quality,q_80&amp;size=750x120" alt=""></a></div>
   <div class="new-container">
       <div class="omain">

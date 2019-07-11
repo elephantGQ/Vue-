@@ -1,277 +1,172 @@
 <template>
   <div class="main">
       <page-header :title="title"></page-header>
-<div class="container">
+<div class="container" v-if="datalist.length">
     <div class="swiper">
   
 
    
     <div class="swiper-container">
               <div class="swiper-wrapper">
-            <div class="swiper-slide" ><a href="" ><img src="https://sr.aihuishou.com/sos/image/636975922267623280796419689.png?x-oss-process=image/quality,q_80&amp;size=750x450"></a>
+            <div class="swiper-slide" v-for="item in datalist[0].items" :key=item.id><a href="" ><img :src=item.imageUrl></a>
                 </div>
-                <div class="swiper-slide" ><a href="" ><img src="https://sr.aihuishou.com/sos/image/636973633578500460544226783.jpg?x-oss-process=image/quality,q_80&amp;size=750x450"></a>
                 </div>
-                <div class="swiper-slide" ><a href="" ><img src="https://sr.aihuishou.com/sos/image/6369578469924370901751398849.jpg?x-oss-process=image/quality,q_80&amp;size=750x450"></a>
+                 <div class="swiper-pagination"></div><!--分页器。如果放置在swiper-container外面，需要自定义样式。-->
                 </div>
-                <div class="swiper-slide" ><a href="" ><img src="https://sr.aihuishou.com/sos/image/6369546298092102301156018736.jpg?x-oss-process=image/quality,q_80&amp;size=750x450"></a>
-                </div>
-                </div></div>
                 
    </div>
-   <div class="single-image"><a href="javascript:;"><img src="https://sr.aihuishou.com/sos/image/6369342773031882901633133764.jpg?x-oss-process=image/quality,q_80&amp;size=750x75" alt=""></a></div>
+   <div class="single-image"><a href="javascript:;"><img :src=datalist[1].items[0].imageUrl></a></div>
  
-   <div class="new-product">
- <div class="page-new-product left">
+   <div class="new-product" v-for="item in [2,3,4,5,6,7]" :key=item>
+ <div class="page-new-product left" @click="handleClick(datalist[item].items[0].items[0].productId)" :id="datalist[item].items[0].items[0].productId">
     <div class="img-part"><img
-            src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/黑新MTU1OTcxNzYwNDYxOQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-        <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>200</span></div>
+            :src=datalist[item].items[0].items[0].imgUrl>
+        <div class="tip"><span class="text">{{datalist[item].items[0].items[0].subsidyText}}</span><span class="price"><i>￥</i>{{datalist[item].items[0].items[0].subsidies}}</span></div>
     </div>
     <div class="text-part one-price">
-        <div class="text"><span class="title">荣耀20 8GB 256GB 幻夜黑 全网通</span><span class="sale">荣耀官方合作 同步首销</span></div>
-        <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">2999</i></span></p>
+        <div class="text"><span class="title">{{datalist[item].items[0].items[0].name}}</span><span class="sale">{{datalist[item].items[0].items[0].promotionText}}</span></div>
+        <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">{{datalist[item].items[0].items[0].price}}</i></span></p>
         <div class="btns">
             <div class="buy-now">立即换新</div>
         </div>
     </div>
 </div>
    </div>
-   <div class="new-product">
- <div class="page-new-product left">
-    <div class="img-part"><img
-            src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/黑新MTU1OTcxNzYwNDYxOQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-        <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>200</span></div>
-    </div>
-    <div class="text-part one-price">
-        <div class="text"><span class="title">荣耀20 8GB 256GB 幻夜黑 全网通</span><span class="sale">荣耀官方合作 同步首销</span></div>
-        <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">2999</i></span></p>
-        <div class="btns">
-            <div class="buy-now">立即换新</div>
-        </div>
-    </div>
-</div>
-   </div>
-   <div class="new-product">
- <div class="page-new-product left">
-    <div class="img-part"><img
-            src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/黑新MTU1OTcxNzYwNDYxOQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-        <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>200</span></div>
-    </div>
-    <div class="text-part one-price">
-        <div class="text"><span class="title">荣耀20 8GB 256GB 幻夜黑 全网通</span><span class="sale">荣耀官方合作 同步首销</span></div>
-        <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">2999</i></span></p>
-        <div class="btns">
-            <div class="buy-now">立即换新</div>
-        </div>
-    </div>
-</div>
-   </div>
-   <div class="new-product">
- <div class="page-new-product left">
-    <div class="img-part"><img
-            src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/黑新MTU1OTcxNzYwNDYxOQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-        <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>200</span></div>
-    </div>
-    <div class="text-part one-price">
-        <div class="text"><span class="title">荣耀20 8GB 256GB 幻夜黑 全网通</span><span class="sale">荣耀官方合作 同步首销</span></div>
-        <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">2999</i></span></p>
-        <div class="btns">
-            <div class="buy-now">立即换新</div>
-        </div>
-    </div>
-</div>
-   </div>
-   <div class="new-product">
- <div class="page-new-product left">
-    <div class="img-part"><img
-            src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/黑新MTU1OTcxNzYwNDYxOQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-        <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>200</span></div>
-    </div>
-    <div class="text-part one-price">
-        <div class="text"><span class="title">荣耀20 8GB 256GB 幻夜黑 全网通</span><span class="sale">荣耀官方合作 同步首销</span></div>
-        <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">2999</i></span></p>
-        <div class="btns">
-            <div class="buy-now">立即换新</div>
-        </div>
-    </div>
-</div>
-   </div>
+ 
+ 
   
-     <div class="single-image"><a href="javascript:;"><img src="https://sr.aihuishou.com/sos/image/636934281505770480536443817.jpg?x-oss-process=image/quality,q_80&amp;size=750x75" alt=""></a></div>
-<div class="new-product-two">
+     <div class="single-image"><a href="javascript:;"><img :src=datalist[8].items[0].imageUrl></a></div>
+<div class="new-product-two" v-for="item in [9,10]" :key="item">
  <div class="page-new-product two-product">
-    <div class="product">
+    <div class="product" @click="handleClick(datalist[item].items[0].items[0].productId)" :id="datalist[item].items[0].items[0].productId">
         <div class="top-part"><img
-                src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/c1f49cd69e6c7e6aMTU2MTQ3Nzk4MDY2Nw==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-            <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>10</span></div>
+                :src=datalist[item].items[0].items[0].imgUrl>
+            <div class="tip"><span class="text">{{datalist[item].items[0].items[0].subsidyText}}</span><span class="price"><i>￥</i>{{datalist[item].items[0].items[0].subsidies}}</span></div>
         </div>
         <div class="bottom-part">
-            <p class="text"><span class="title">红米 Note 7 3GB 32GB 亮黑色 全网通</span><span class="sale">4800万拍照千元机</span>
+            <p class="text"><span class="title">{{datalist[item].items[0].items[0].name}}</span><span class="sale">{{datalist[item].items[0].items[0].promotionText}}</span>
             </p>
-            <p class="price"><span class="new">换新到手价￥<i class="num">929</i></span><del class="old">官方指导价：￥<i
-                        class="num">999</i></del></p>
+            <p class="price"><span class="new">换新到手价￥<i class="num">{{datalist[item].items[0].items[0].price-datalist[item].items[0].items[0].subsidies}}</i></span><del class="old">官方指导价：￥<i
+                        class="num">{{datalist[item].items[0].items[0].price}}</i></del></p>
             <div class="btns">
                 <div class="buy-now">立即换新</div>
+                
             </div>
+            <img class="gift-tag-img" v-if="datalist[item].items[0].items[0].isShowGiftTag"
+                :src=datalist[item].items[0].items[0].giftTagImage>
         </div>
     </div>
     <div class="jx"></div>
-    <div class="product">
+    <div class="product" @click="handleClick(datalist[item].items[0].items[1].productId)" :id="datalist[item].items[0].items[1].productId">
         <div class="top-part"><img
-                src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/ce6c1dee969fb626MTU2MTQ3ODA3MTc4NA==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-            <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>100</span></div>
+                :src=datalist[item].items[0].items[1].imgUrl>
+            <div class="tip"><span class="text">{{datalist[item].items[0].items[1].subsidyText}}</span><span class="price"><i>￥</i>{{datalist[item].items[0].items[1].subsidies}}</span></div>
         </div>
         <div class="bottom-part">
-            <p class="text"><span class="title">小米手机 9 6GB 128GB 幻彩蓝 4G全网通</span><span class="sale">骁龙855 三摄广角</span>
+            <p class="text"><span class="title">{{datalist[item].items[0].items[1].name}}</span><span class="sale">{{datalist[item].items[0].items[1].promotionText}}</span>
             </p>
-            <p class="price"><span class="new">换新到手价￥<i class="num">2899</i></span><del class="old">官方指导价：￥<i
-                        class="num">2999</i></del></p>
+            <p class="price"><span class="new">换新到手价￥<i class="num">{{datalist[item].items[0].items[1].price-datalist[item].items[0].items[1].subsidies}}</i></span><del class="old">官方指导价：￥<i
+                        class="num">{{datalist[item].items[0].items[1].price}}</i></del></p>
             <div class="btns">
                 <div class="buy-now">立即换新</div>
-            </div><img class="gift-tag-img"
-                src="https://sr.aihuishou.com/sos/image/6369759241321175802094905383.png?x-oss-process=image/quality,q_80&amp;size=112x80">
+                
+            </div>
+            <img class="gift-tag-img" v-if="datalist[item].items[0].items[1].isShowGiftTag"
+                :src=datalist[item].items[0].items[1].giftTagImage>
         </div>
     </div>
-</div>
+    </div>
 
 </div>
-<div class="new-product-two">
-    <div class="page-new-product two-product">
-    <div class="product">
+
+  <div class="single-image"><a href="javascript:;"><img :src=datalist[11].items[0].imageUrl></a></div>
+  
+<div class="new-product-two" v-for="item in [12,13,14,15,16,17]" :key="item">
+ <div class="page-new-product two-product">
+    <div class="product" @click="handleClick(datalist[item].items[0].items[0].productId)" :id="datalist[item].items[0].items[0].productId">
         <div class="top-part"><img
-                src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/c238c78cd798a1bdMTU2MTQ3NzgyOTM0MA==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-            <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>100</span></div>
+                :src=datalist[item].items[0].items[0].imgUrl>
+            <div class="tip"><span class="text">{{datalist[item].items[0].items[0].subsidyText}}</span><span class="price"><i>￥</i>{{datalist[item].items[0].items[0].subsidies}}</span></div>
         </div>
         <div class="bottom-part">
-            <p class="text"><span class="title">红米 K20 Pro 8GB 128GB 火焰红 全网通</span><span class="sale">【新品首发】骁龙855</span>
+            <p class="text"><span class="title">{{datalist[item].items[0].items[0].name}}</span><span class="sale">{{datalist[item].items[0].items[0].promotionText}}</span>
             </p>
-            <p class="price"><span class="new">换新到手价￥<i class="num">2699</i></span><del class="old">官方指导价：￥<i
-                        class="num">2799</i></del></p>
+            <p class="price"><span class="new">换新到手价￥<i class="num">{{datalist[item].items[0].items[0].price-datalist[item].items[0].items[0].subsidies}}</i></span><del class="old">官方指导价：￥<i
+                        class="num">{{datalist[item].items[0].items[0].price}}</i></del></p>
             <div class="btns">
                 <div class="buy-now">立即换新</div>
+                
             </div>
+            <img class="gift-tag-img" v-if="datalist[item].items[0].items[0].isShowGiftTag"
+                :src=datalist[item].items[0].items[0].giftTagImage>
         </div>
     </div>
     <div class="jx"></div>
-    <div class="product">
+    <div class="product" @click="handleClick(datalist[item].items[0].items[1].productId)" :id="datalist[item].items[0].items[1].productId">
         <div class="top-part"><img
-                src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/K20-1MTU2MTM2NzExNTQ3Nw==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-            <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>100</span></div>
+                :src=datalist[item].items[0].items[1].imgUrl>
+            <div class="tip"><span class="text">{{datalist[item].items[0].items[1].subsidyText}}</span><span class="price"><i>￥</i>{{datalist[item].items[0].items[1].subsidies}}</span></div>
         </div>
         <div class="bottom-part">
-            <p class="text"><span class="title">红米 K20 6GB 128GB 碳纤黑 全网通</span><span
-                    class="sale">【新品首发】4800万超广角三摄</span></p>
-            <p class="price"><span class="new">换新到手价￥<i class="num">1999</i></span><del class="old">官方指导价：￥<i
-                        class="num">2099</i></del></p>
-            <div class="btns">
-                <div class="buy-now">立即换新</div>
-            </div>
-        </div>
-    </div>
-</div>
-    </div>
-  <div class="single-image"><a href="javascript:;"><img src="https://sr.aihuishou.com/sos/image/6369342862273520501010854439.jpg?x-oss-process=image/quality,q_80&amp;size=750x75" alt=""></a></div>
-  <div class="new-product-two">
-<div class="page-new-product two-product">
-    <div class="product">
-        <div class="top-part"><img
-                src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/a2c208410ae84d1fMTU2MTQ3NzU5ODUxOA==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-            <div class="tip"><span class="text">换新补贴</span><span class="price"><i>￥</i>150</span></div>
-        </div>
-        <div class="bottom-part">
-            <p class="text"><span class="title">Apple iPhone XR 128GB 黑色 双卡双待</span><span class="sale">性价比超高的高端机</span>
+            <p class="text"><span class="title">{{datalist[item].items[0].items[1].name}}</span><span class="sale">{{datalist[item].items[0].items[1].promotionText}}</span>
             </p>
-            <p class="price"><span class="new">换新到手价￥<i class="num">5338</i></span><del class="old">官方指导价：￥<i
-                        class="num">6699</i></del></p>
+            <p class="price"><span class="new">换新到手价￥<i class="num">{{datalist[item].items[0].items[1].price-datalist[item].items[0].items[1].subsidies}}</i></span><del class="old">官方指导价：￥<i
+                        class="num">{{datalist[item].items[0].items[1].price}}</i></del></p>
             <div class="btns">
                 <div class="buy-now">立即换新</div>
+                
             </div>
+            <img class="gift-tag-img" v-if="datalist[item].items[0].items[1].isShowGiftTag"
+                :src=datalist[item].items[0].items[1].giftTagImage>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+
+  <div class="single-image"><a href="javascript:;"><img :src=datalist[18].items[0].imageUrl></a></div>
+<div class="new-product-two" v-for="item in [19]" :key="item">
+ <div class="page-new-product two-product">
+    <div class="product" @click="handleClick(datalist[item].items[0].items[0].productId)" :id="datalist[item].items[0].items[0].productId">
+        <div class="top-part"><img
+                :src=datalist[item].items[0].items[0].imgUrl>
+            <div class="tip"><span class="text">{{datalist[item].items[0].items[0].subsidyText}}</span><span class="price"><i>￥</i>{{datalist[item].items[0].items[0].subsidies}}</span></div>
+        </div>
+        <div class="bottom-part">
+            <p class="text"><span class="title">{{datalist[item].items[0].items[0].name}}</span><span class="sale">{{datalist[item].items[0].items[0].promotionText}}</span>
+            </p>
+            <p class="price"><span class="new">换新到手价￥<i class="num">{{datalist[item].items[0].items[0].price-datalist[item].items[0].items[0].subsidies}}</i></span><del class="old">官方指导价：￥<i
+                        class="num">{{datalist[item].items[0].items[0].price}}</i></del></p>
+            <div class="btns">
+                <div class="buy-now">立即换新</div>
+                
+            </div>
+            <img class="gift-tag-img" v-if="datalist[item].items[0].items[0].isShowGiftTag"
+                :src=datalist[item].items[0].items[0].giftTagImage>
         </div>
     </div>
     <div class="jx"></div>
-    <div class="product">
+    <div class="product" @click="handleClick(datalist[item].items[0].items[1].productId)" :id="datalist[item].items[0].items[1].productId">
         <div class="top-part"><img
-                src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/45ab3dd6c35d981bMTU2MTQ3ODIwNjg0OQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-            <div class="tip"><span class="text">换新补贴</span><span class="price"><i>￥</i>200</span></div>
+                :src=datalist[item].items[0].items[1].imgUrl>
+            <div class="tip"><span class="text">{{datalist[item].items[0].items[1].subsidyText}}</span><span class="price"><i>￥</i>{{datalist[item].items[0].items[1].subsidies}}</span></div>
         </div>
         <div class="bottom-part">
-            <p class="text"><span class="title">Apple iPhone XS Max 256GB 金色 双卡双待</span><span
-                    class="sale">双卡双待的年度机皇</span></p>
-            <p class="price"><span class="new">换新到手价￥<i class="num">8588</i></span><del class="old">官方指导价：￥<i
-                        class="num">10499</i></del></p>
+            <p class="text"><span class="title">{{datalist[item].items[0].items[1].name}}</span><span class="sale">{{datalist[item].items[0].items[1].promotionText}}</span>
+            </p>
+            <p class="price"><span class="new">换新到手价￥<i class="num">{{datalist[item].items[0].items[1].price-datalist[item].items[0].items[1].subsidies}}</i></span><del class="old">官方指导价：￥<i
+                        class="num">{{datalist[item].items[0].items[1].price}}</i></del></p>
             <div class="btns">
                 <div class="buy-now">立即换新</div>
+                
             </div>
+            <img class="gift-tag-img" v-if="datalist[item].items[0].items[1].isShowGiftTag"
+                :src=datalist[item].items[0].items[1].giftTagImage>
         </div>
     </div>
-</div>
-</div>
-  <div class="single-image"><a href="javascript:;"><img src="https://sr.aihuishou.com/sos/image/6369342885818128201869403918.jpg?x-oss-process=image/quality,q_80&amp;size=750x75" alt=""></a></div>
- <div class="new-product-two">
-    <div class="page-new-product two-product">
-        <div class="product one-price">
-            <div class="top-part"><img
-                    src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/5be56ab7Nc6afd642MTU1ODU5MDUwNTg4NQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-                <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>150</span></div>
-            </div>
-            <div class="bottom-part">
-                <p class="text"><span class="title">荣耀8X 6GB+128GB 幻夜黑</span><span class="sale">千元超大屏旗舰机</span></p>
-                <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">1699</i></span></p>
-                <div class="btns">
-                    <div class="buy-now">立即换新</div>
-                </div><img class="gift-tag-img"
-                    src="https://sr.aihuishou.com/sos/image/636975924569353040215911830.png?x-oss-process=image/quality,q_80&amp;size=112x80">
-            </div>
-        </div>
-        <div class="jx"></div>
-        <div class="product one-price">
-            <div class="top-part"><img
-                    src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/70fbbccdf8811111MTU2MTQ3ODMwODc2MQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-                <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>300</span></div>
-            </div>
-            <div class="bottom-part">
-                <p class="text"><span class="title">荣耀Magic2 8GB+128GB 渐变黑</span><span class="sale">魔法滑屏 麒麟980芯片</span>
-                </p>
-                <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">2999</i></span></p>
-                <div class="btns">
-                    <div class="buy-now">立即换新</div>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
-<div class="new-product-two">
-    <div class="page-new-product two-product">
-        <div class="product one-price">
-            <div class="top-part"><img
-                    src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/5be56ab7Nc6afd642MTU1ODU5MDUwNTg4NQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-                <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>150</span></div>
-            </div>
-            <div class="bottom-part">
-                <p class="text"><span class="title">荣耀8X 6GB+128GB 幻夜黑</span><span class="sale">千元超大屏旗舰机</span></p>
-                <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">1699</i></span></p>
-                <div class="btns">
-                    <div class="buy-now">立即换新</div>
-                </div><img class="gift-tag-img"
-                    src="https://sr.aihuishou.com/sos/image/636975924569353040215911830.png?x-oss-process=image/quality,q_80&amp;size=112x80">
-            </div>
-        </div>
-        <div class="jx"></div>
-        <div class="product one-price">
-            <div class="top-part"><img
-                    src="https://ahs-trade-in-static.aihuishou.com/trade-in-product-option-img/70fbbccdf8811111MTU2MTQ3ODMwODc2MQ==.jpg?x-oss-process=image/resize,m_fill,w_200,h_200/quality,Q_80">
-                <div class="tip"><span class="text">换新再省</span><span class="price"><i>￥</i>300</span></div>
-            </div>
-            <div class="bottom-part">
-                <p class="text"><span class="title">荣耀Magic2 8GB+128GB 渐变黑</span><span class="sale">魔法滑屏 麒麟980芯片</span>
-                </p>
-                <p class="price"><span class="old">官方指导价<i>￥</i><i class="num">2999</i></span></p>
-                <div class="btns">
-                    <div class="buy-now">立即换新</div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
   <div class="single-image"><a href="javascript:;"><img src="https://sr.aihuishou.com/sos/image/6368308736179278501250759584.png?x-oss-process=image/quality,q_80&amp;size=750x656" alt=""></a></div>
   <div class="single-image"><a href="javascript:;"><img src="https://sr.aihuishou.com/sos/image/636783346407056120344016565.png?x-oss-process=image/quality,q_80&amp;size=750x210" alt=""></a></div>
@@ -282,28 +177,56 @@
 <script>
 import { Indicator, Toast } from 'mint-ui'
 import Swiper from 'swiper'
+import http from '../utils/http'
 import PageHeader from '@/components/PageHeader.vue'
 export default {
      name:"new",
      data() {
          return {
-             title:"爱回收 0元换新机"
+             title:"爱回收 0元换新机",
+             datalist:[]
          }
      },
-     mounted() {
-         console.log(document.querySelector('.swiper-container'))
-         var mySwiper = new Swiper('.swiper-container', {
-        autoplay: true,//可选选项，自动滑动
-        pagination: {
-    el: '.swiper-pagination',
-  },
-        })
+    async mounted() {
+        
+        Indicator.open({
+        text: 'Loading...',
+        spinnerType: 'snake'
+        });    
+         let result = await http.get({
+            url: `/api/ofnew/home?cityId=31`,
+            headers:{
+                "Ahs-Guid":"caa630a4-df46-10cc-950b-7fef5cae5ad3",
+                "Ahs-App-Id":"10002"
+            }
+            })
+            this.datalist=result.data
+            console.log(this.datalist)
+            Indicator.close()
+             this.$nextTick( async() => {
+                var mySwiper = new Swiper('.swiper-container', {
+                autoplay: true,//可选选项，自动滑动
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                })
+             })
     // Indicator.open({
     //   text: '加载中...',
     //   spinnerType: 'triple-bounce'
     // })
    
      },
+  methods: {
+    handleClick(pid) {
+        this.$router.push({
+        name: 'detail',
+        params: {
+            pid
+            }
+            })
+        },
+  },
      components:{
          PageHeader
      }
@@ -313,9 +236,18 @@ export default {
 @import '~@/assets/styles/border'
 @import '~@/assets/styles/ellipsis'
 html,body 
-    
     height 100%
-    width 100%    
+    width 100%  
+.swiper-pagination-bullet 
+    width .05rem !important
+    height .05rem !important
+    display inline-block
+    border-radius 100%
+    background #fff
+    opacity 0.2
+.swiper-pagination-bullet-active
+    opacity: 1;
+    background: #fff;   
 .main
   height 100%
   width 100%
@@ -336,11 +268,8 @@ html,body
         img 
             width 100%
     .swiper-container
-        height 2.08rem
         margin 0 .14rem
-        overflow hidden
         .swiper-wrapper
-            width 500%
             .swiper-slide
                 width 3.47rem
                 height 2.08rem
@@ -350,10 +279,16 @@ html,body
                     img 
                         width 3.47rem
                         height 2.08rem
+            
     .swiper
         padding-bottom .1rem
         background #fff
-
+       
+    .swiper-pagination
+        background none
+        
+        
+          
     .new-product
         padding  0 0 .1rem
         .page-new-product
@@ -366,6 +301,8 @@ html,body
             padding  0 .2rem
             
             .img-part
+                height 1.2rem
+                width 1.2rem
                 position relative
                 img 
                     height 1.2rem
@@ -382,7 +319,6 @@ html,body
                     left: -.04rem;
                     top: -.02rem;
                     span.price
-                        
                         font-size .14rem
                         font-weight: 700;
                         line-height 1em

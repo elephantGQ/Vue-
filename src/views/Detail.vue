@@ -57,7 +57,7 @@
             <div class="title">优惠福利</div>
             <div class="content">
                 <div class="item subsidy-item">
-                    <div class="left"><span class="title">{{detail.skus[0].subsidyTags[0]}}</span></div>
+                    <div class="left"><span class="title">以旧换新补贴</span></div>
                     <div class="right"><span class="right-price"><span class="right-price-sign">-¥</span><span
                                 class="right-price-num">{{Number(detail.skus[0].subsidyAmount)/100}}</span></span><span class="action"></span></div>
                 </div>
@@ -90,7 +90,7 @@
     <div class="text">
         <div>添加旧机获取超值换新价</div>
     </div>
-    <router-link to="/category/1" tag="div" class="actions">
+    <router-link to="/category/1/0" tag="div" class="actions">
         <div class="button button-available">添加旧机</div>
     </router-link>
 </div>
@@ -126,7 +126,9 @@ export default {
       }
     })
     console.log(this.$route.params)
+    
     this.detail=result.data
+    console.log(this.detail)
     this.flag=true
     Indicator.close()
      this.$nextTick( async() => {

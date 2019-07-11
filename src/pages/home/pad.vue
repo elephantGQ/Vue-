@@ -1,6 +1,6 @@
 <template>
 
-  <sell v-if="flag" :li1="dataList[0].items" :li2="dataList[1].items" :msg1="dataList[4].items" :msg2="dataList[5].items" :msg3="dataList[6].items" ></sell>
+  <sell v-if="flag" :type=6 :li1="dataList[0].items" :li2="dataList[1].items" :msg1="dataList[4].items" :msg2="dataList[5].items" :msg3="dataList[6].items" ></sell>
 </template>
 <script>
 import Sell from '@/components/Sell.vue'

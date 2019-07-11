@@ -82,9 +82,6 @@ export default {
       var vm = this
         let result=await http.post({
         url:"api/product/search",
-        headers:{
-            "Content-Type":"application/json;charset=UTF-8"
-        },
         data:{"keyWord":this.question,"pageIndex":1,"pageSize":20,"categoryId":"","brandId":""}
         })
         this.product=result.data

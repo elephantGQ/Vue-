@@ -11,7 +11,7 @@
         <router-link  class="search"  to="/search">
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe63c;</span>搜索您要卖的品牌、机器型号
         </router-link>
-        <router-link class="cart" to="/category/1">
+        <router-link class="cart" to="/category/1/0">
           <span class="iconfont " style="color: rgb(0, 0, 0);">&#xe63b;</span>
         </router-link>
     </header>
