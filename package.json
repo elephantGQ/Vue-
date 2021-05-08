@@ -15,7 +15,7 @@
     "mint-ui": "^2.2.13",
     "query-string": "^6.8.1",
     "swiper": "^4.5.0",
-    "url-parse": "^1.4.7",
+    "url-parse": "^1.5.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
