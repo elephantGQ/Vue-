@@ -14,7 +14,7 @@
     "lodash": "^4.17.11",
     "mint-ui": "^2.2.13",
     "query-string": "^6.8.1",
-    "swiper": "^4.5.0",
+    "swiper": "^6.5.1",
     "url-parse": "^1.4.7",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
